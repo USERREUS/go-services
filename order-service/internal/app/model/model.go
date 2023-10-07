@@ -7,7 +7,7 @@ package model
 // }
 
 type Model struct {
-	ProductCode string `json:"product_code"`
+	ProductCode string `json:"id"`
 	Name        string `json:"name"`
 	Count       int    `json:"count"`
 	Cost        int    `json:"cost"`

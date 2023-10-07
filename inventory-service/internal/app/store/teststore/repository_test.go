@@ -1,9 +1,9 @@
 package teststore_test
 
 import (
-	"http-rest-api/internal/app/model"
-	"http-rest-api/internal/app/store"
-	"http-rest-api/internal/app/store/teststore"
+	"inventory/internal/app/model"
+	"inventory/internal/app/store"
+	"inventory/internal/app/store/teststore"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

@@ -2,8 +2,8 @@ package apiserver
 
 import (
 	"encoding/json"
-	"http-rest-api/internal/app/model"
-	"http-rest-api/internal/app/store"
+	"inventory/internal/app/model"
+	"inventory/internal/app/store"
 	"net/http"
 	"time"
 
@@ -102,7 +102,7 @@ func (s *server) handleInventoryFindOne() http.HandlerFunc {
 			return
 		}
 
-		s.respond(w, r, http.StatusFound, record)
+		s.respond(w, r, http.StatusOK, record)
 	}
 }
 
@@ -114,7 +114,7 @@ func (s *server) handleInventoryFindAll() http.HandlerFunc {
 			return
 		}
 
-		s.respond(w, r, http.StatusFound, records)
+		s.respond(w, r, http.StatusOK, records)
 	}
 }
 

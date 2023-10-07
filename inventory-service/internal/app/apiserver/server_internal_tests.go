@@ -3,7 +3,7 @@ package apiserver
 import (
 	"bytes"
 	"encoding/json"
-	"http-rest-api/internal/app/store/teststore"
+	"inventory/internal/app/store/teststore"
 	"net/http"
 	"net/http/httptest"
 	"testing"

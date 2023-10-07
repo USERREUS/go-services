@@ -34,7 +34,6 @@ func (r *Repository) Create(m *model.Model) error {
 		Cost:        m.Cost,
 	}
 
-	//FIX
 	order := Order{
 		Date:      time.Now().String(),
 		OrderItem: item,

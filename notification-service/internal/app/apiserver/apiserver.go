@@ -24,7 +24,6 @@ func Start(config *Config) error {
 	collection := database.Collection("inventory")
 
 	store := mongostore.New(ctx, collection)
-	//store := teststore.New()
 	srv := newServer(store)
 
 	return http.ListenAndServe(config.BindAddr, srv)

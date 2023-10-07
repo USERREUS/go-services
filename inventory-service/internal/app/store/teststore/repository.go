@@ -1,8 +1,8 @@
 package teststore
 
 import (
-	"http-rest-api/internal/app/model"
-	"http-rest-api/internal/app/store"
+	"inventory/internal/app/model"
+	"inventory/internal/app/store"
 
 	"github.com/google/uuid"
 )
@@ -17,6 +17,17 @@ func (r *Repository) Create(p *model.Model) error {
 	r.records[p.ID] = p
 
 	return nil
+}
+
+func (r *Repository) Update(m *model.Model) error {
+	for _, item := range r.records {
+		if m.ID == item.ID {
+			r.records[m.ID] = m
+			return nil
+		}
+	}
+
+	return store.ErrRecordNotFound
 }
 
 func (r *Repository) FindOne(id string) (*model.Model, error) {

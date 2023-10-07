@@ -2,7 +2,7 @@ package apiserver
 
 import (
 	"database/sql"
-	"http-rest-api/internal/app/store/sqlstore"
+	"inventory/internal/app/store/sqlstore"
 	"net/http"
 
 	_ "github.com/lib/pq"

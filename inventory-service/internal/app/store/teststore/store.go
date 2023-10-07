@@ -1,8 +1,8 @@
 package teststore
 
 import (
-	"http-rest-api/internal/app/model"
-	"http-rest-api/internal/app/store"
+	"inventory/internal/app/model"
+	"inventory/internal/app/store"
 )
 
 type Store struct {

@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"http-rest-api/internal/app/apiserver"
+	"inventory/internal/app/apiserver"
 	"log"
 
 	"github.com/BurntSushi/toml"

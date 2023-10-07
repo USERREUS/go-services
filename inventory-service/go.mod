@@ -1,4 +1,4 @@
-module http-rest-api
+module inventory
 
 go 1.18
 

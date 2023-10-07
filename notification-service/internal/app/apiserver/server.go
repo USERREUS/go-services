@@ -2,11 +2,13 @@ package apiserver
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"notification-service/internal/app/model"
 	"notification-service/internal/app/store"
 	"time"
 
+	"github.com/IBM/sarama"
 	"github.com/gorilla/mux"
 	"github.com/sirupsen/logrus"
 )
@@ -25,12 +27,44 @@ func newServer(store store.Store) *server {
 	}
 
 	s.configureRouter()
+	go s.cons()
 
 	return s
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	s.router.ServeHTTP(w, r)
+}
+
+func (s *server) cons() error {
+	config := sarama.NewConfig()
+	consumer, err := sarama.NewConsumer([]string{"localhost:9092"}, config)
+	if err != nil {
+		return err
+	}
+	defer consumer.Close()
+
+	partitionConsumer, err := consumer.ConsumePartition("order-topic", 0, sarama.OffsetNewest)
+	if err != nil {
+		return err
+	}
+	defer partitionConsumer.Close()
+
+	for {
+		select {
+		case msg := <-partitionConsumer.Messages():
+			m := &model.Model{
+				MsgType:     msg.Topic,
+				Description: string(msg.Value),
+			}
+
+			if err := s.store.Repository().Create(m); err != nil {
+				return err
+			}
+
+			fmt.Printf("Received message: %s\n", msg.Value)
+		}
+	}
 }
 
 func (s *server) configureRouter() {

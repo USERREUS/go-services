@@ -1,9 +1,9 @@
 package sqlstore_test
 
 import (
-	"http-rest-api/internal/app/model"
-	"http-rest-api/internal/app/store"
-	"http-rest-api/internal/app/store/sqlstore"
+	"inventory/internal/app/model"
+	"inventory/internal/app/store"
+	"inventory/internal/app/store/sqlstore"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

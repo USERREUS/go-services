@@ -2,7 +2,7 @@ package sqlstore
 
 import (
 	"database/sql"
-	"http-rest-api/internal/app/store"
+	"inventory/internal/app/store"
 )
 
 type Store struct {

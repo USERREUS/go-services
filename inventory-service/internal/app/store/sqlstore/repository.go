@@ -3,8 +3,8 @@ package sqlstore
 import (
 	"database/sql"
 	"fmt"
-	"http-rest-api/internal/app/model"
-	"http-rest-api/internal/app/store"
+	"inventory/internal/app/model"
+	"inventory/internal/app/store"
 
 	"github.com/google/uuid"
 )
@@ -21,6 +21,17 @@ func (r *Repository) Create(m *model.Model) error {
 	m.ID = uuid.New().String()
 	return r.store.db.QueryRow(
 		fmt.Sprintf("INSERT INTO %s (id, name, count, cost) VALUES ($1, $2, $3, $4) RETURNING id", table),
+		m.ID,
+		m.Name,
+		m.Count,
+		m.Cost,
+	).Scan(&m.ID)
+}
+
+func (r *Repository) Update(m *model.Model) error {
+	m.ID = uuid.New().String()
+	return r.store.db.QueryRow(
+		fmt.Sprintf("UPDATE %s SET name = $2, count = $3, cost = $4 WHERE id = $1 RETURNING id", table), ///FIX??
 		m.ID,
 		m.Name,
 		m.Count,
